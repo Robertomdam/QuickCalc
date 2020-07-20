@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="brandLight">#fff</color>
+    <color name="brand">#fff</color>
+    <color name="brandDark">#fff</color>
+
+    <color name="accentLight">#fff</color>
+    <color name="accent">#fff</color>
+    <color name="accentDark">#fff</color>
+
+    <color name="white">#EEEEEE</color>
+    <color name="whiteGrey">#CCCCCC</color>
+    <color name="black">#222222</color>
+    <color name="error">#FF4242</color>
+
+    <color name="greyLightPlus">#6e6e6b</color>
+    <color name="greyLight">#5d5d5a</color>
+    <color name="grey">#4c4c49</color>
+    <color name="greyDark">#3b3b38</color>
+    <color name="greyDarkPlus">#2a2a27</color>
+
+    <color name="redLight">#f85959</color>
+    <color name="red">#ff304f</color>
+
+</resources>
