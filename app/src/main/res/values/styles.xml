@@ -18,15 +18,11 @@
     </style>
 
     <style name="OperationButtonStyle" parent="ButtonStyle">
-<!--        <item name="android:background">@drawable/button_background</item>-->
         <item name="android:background">@color/greyDark</item>
-<!--        <item name="android:textColor">@color/black</item>-->
     </style>
 
     <style name="WarningButtonStyle" parent="ButtonStyle">
-<!--        <item name="android:background">@drawable/button_background</item>-->
-        <item name="android:background">#ff304f</item>
-<!--        <item name="android:textColor">@color/cyan</item>-->
+        <item name="android:background">@color/red</item>
     </style>
 
 </resources>
