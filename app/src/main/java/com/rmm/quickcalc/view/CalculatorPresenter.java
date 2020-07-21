@@ -1,12 +1,10 @@
 package com.rmm.quickcalc.view;
 
-import android.util.Log;
-
-import com.rmm.quickcalc.data.CalculatorManager;
+import com.rmm.quickcalc.data.CalculatorModel;
 import com.rmm.quickcalc.data.EOperators;
+import com.rmm.quickcalc.data.Expression;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;;
 
 public class CalculatorPresenter implements ICalculator.Presenter {
@@ -14,17 +12,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     private ICalculator.View mView;
     private ICalculator.Model mModel;
 
-    /**
-     * This is a key-value list that contains the available operators in the calculator with its associated string (Got from R's resources)
-     */
-    HashMap<EOperators, String> mOperators;
-
     public CalculatorPresenter (ICalculator.View view, HashMap<EOperators, String> operators)
     {
-        mOperators = operators;
-
         mView = view;
-        mModel = new CalculatorManager(this);
+        mModel = new CalculatorModel(this, operators);
     }
 
     @Override
@@ -53,23 +44,36 @@ public class CalculatorPresenter implements ICalculator.Presenter {
 
     @Override
     public void onDotPressed() {
+
         String displayData = mView.getDisplayData();
 
-        String number = "";
+        String lastElement = String.valueOf ( mView.getLastElementDisplayData() );
 
-        // Look for the last operator in the string (If any)
-        number = extractLastTermFromExpression (displayData.toCharArray());
+        if (lastElement.equals("."))
+        {
+            return;
+        }
+        else if (mModel.isOperator (lastElement)) // Its an operator
+        {
+            mView.appendDisplayData("0.");
+        }
+        else    // Its a number
+        {
+            // Check if the full number already has a dot
 
-        // If none operator was found, its because there is only one number, so continue with it
-        if (number.isEmpty())
-            number = displayData;
+            Expression expression = new Expression (displayData);
+            expression.extract();
 
-        if (number.equals("0"))
-            mView.appendDisplayData("0");
+            if (expression.getStatus() != Expression.Status.READY)
+                return;
 
-        // Check if the number already have a dot. If not, append the dot (Else do nothing)
-        if (!number.contains("."))
-            mView.appendDisplayData(".");
+            ArrayList<String> terms = expression.getTerms();
+            String number = terms.get (terms.size() - 1);
+
+            if (!number.contains("."))
+                mView.appendDisplayData(".");
+        }
+
     }
 
     @Override
@@ -81,22 +85,22 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     public void onOperatorSumPressed() {
 
         // If last element is an operator, replace by the pressed one
-        if (isOperator(mView.getLastElementDisplayData()))
-            mView.replaceLastElementDisplay ( mOperators.get(EOperators.SUM) );
+        if (mModel.isOperator(mView.getLastElementDisplayData()))
+            mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.SUM) );
         // If it is a number, it appends the operator
         else
-            mView.appendDisplayData ( mOperators.get(EOperators.SUM) );
+            mView.appendDisplayData ( mModel.getOperator (EOperators.SUM) );
     }
 
     @Override
     public void onOperatorMinusPressed() {
 
         // If last element is an operator, replace by the pressed one
-        if (isOperator(mView.getLastElementDisplayData()))
-            mView.replaceLastElementDisplay ( mOperators.get(EOperators.MINUS) );
+        if (mModel.isOperator(mView.getLastElementDisplayData()))
+            mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.MINUS) );
             // If it is a number, it appends the operator
         else
-            mView.appendDisplayData ( mOperators.get(EOperators.MINUS) );
+            mView.appendDisplayData ( mModel.getOperator (EOperators.MINUS) );
 
     }
 
@@ -104,11 +108,11 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     public void onOperatorMultiplicationPressed() {
 
         // If last element is an operator, replace by the pressed one
-        if (isOperator(mView.getLastElementDisplayData()))
-            mView.replaceLastElementDisplay ( mOperators.get(EOperators.MULTIPLICATION) );
+        if (mModel.isOperator(mView.getLastElementDisplayData()))
+            mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.MULTIPLICATION) );
             // If it is a number, it appends the operator
         else
-            mView.appendDisplayData ( mOperators.get(EOperators.MULTIPLICATION) );
+            mView.appendDisplayData ( mModel.getOperator (EOperators.MULTIPLICATION) );
 
     }
 
@@ -116,11 +120,11 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     public void onOperatorDivisionPressed() {
 
         // If last element is an operator, replace by the pressed one
-        if (isOperator(mView.getLastElementDisplayData()))
-            mView.replaceLastElementDisplay ( mOperators.get(EOperators.DIVISION) );
+        if (mModel.isOperator(mView.getLastElementDisplayData()))
+            mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.DIVISION) );
             // If it is a number, it appends the operator
         else
-            mView.appendDisplayData ( mOperators.get(EOperators.DIVISION) );
+            mView.appendDisplayData ( mModel.getOperator (EOperators.DIVISION) );
 
     }
 
@@ -130,40 +134,23 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         if (!mView.isClearedDisplay())
             mView.removeLastElementDisplay();
     }
-
-    private boolean isOperator (char value)
-    {
-        return isOperator (String.valueOf(value));
-    }
-
-    private boolean isOperator (String value)
-    {
-        for (int i = 0; i < mOperators.size(); i++) {
-            String strOperator = mOperators.get ( EOperators.values()[i] );    // Using 'i' since the key is a enum variable
-
-            if (strOperator.equals (value))
-                return true;
-        }
-
-        return false;
-    }
-
-    private String extractLastTermFromExpression (char[] data) {
-
-        String strData = Arrays.toString (data);
-
-        for (int i = data.length - 1; i >= 0 ; i--) {
-
-            // If there exists use the whole number from this operator to the end of the string.
-            if (isOperator(data[i]))
-            {
-                if (i == data.length - 1)
-                    return "0";
-                else
-                    return strData.substring (i + 1, strData.length());
-            }
-        }
-
-        return "";
-    }
+//
+//    private String extractLastTermFromExpression (char[] data) {
+//
+//        String strData = Arrays.toString (data);
+//
+//        for (int i = data.length - 1; i >= 0 ; i--) {
+//
+//            // If there exists use the whole number from this operator to the end of the string.
+//            if (isOperator(data[i]))
+//            {
+//                if (i == data.length - 1)
+//                    return "0";
+//                else
+//                    return strData.substring (i + 1, strData.length());
+//            }
+//        }
+//
+//        return "";
+//    }
 }

@@ -1,10 +1,15 @@
 package com.rmm.quickcalc.view;
 
+import com.rmm.quickcalc.data.EOperators;
+
 public interface ICalculator {
 
     public interface Model
     {
+        boolean isOperator (char value);
+        boolean isOperator (String value);
 
+        String getOperator (EOperators operator);
     }
 
     public interface Presenter
