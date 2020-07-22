@@ -92,4 +92,47 @@ public class Expression {
     public Status getStatus() {
         return mStatus;
     }
+
+    public String getStrExpression ()
+    {
+        StringBuilder strExpression = new StringBuilder();
+
+        for (int i = 0; i < mTerms.size(); i++)
+        {
+            strExpression.append (mTerms.get(i));
+
+            if (i < mOperators.size())
+                strExpression.append (CalculatorSupporter.getOperator(mOperators.get(i)));
+        }
+
+        return strExpression.toString();
+    }
+
+    // This method converts the index of one operator in the operators list to the index of the same operator in the full expression (terms+operators)
+    public int getOperatorIndexInFullExpression (int operatorIndex)
+    {
+        int index = 0;
+
+        for (int i = 0; i <= operatorIndex; i++)
+        {
+            index += mTerms.get(i).length();
+        }
+
+        index += operatorIndex;
+
+        return index;
+    }
+
+    // This method converts the index of one term in the term list to the index of the same term in the full expression (terms+operators)
+    public int getTermIndexInFullExpression (int termIndex)
+    {
+        int index = 0;
+
+        for (int i = 0; i < termIndex; i++)
+        {
+            index += mTerms.get(i).length();
+            index++;   // Corresponding to the operators, since every term will be continued by a operator (Except in the last term, but this will be never reached due to the for condition)
+        }
+        return index;
+    }
 }

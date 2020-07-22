@@ -1,17 +1,24 @@
 <resources>
 
-    <!-- Base application theme. -->
-<!--    <style name="QuickCalcTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <attr name="customButtonStyleRegular" format="reference" />
+    <attr name="customButtonStyleSpecial" format="reference" />
+    <attr name="customButtonStyleWarning" format="reference" />
+
+    // Theme 1
     <style name="QuickCalcTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--        <item name="buttonStyle">?attr/customButtonStyleRegular</item>-->
         <item name="buttonStyle">@style/ButtonStyle</item>
+
+        <item name="customButtonStyleRegular">@style/ButtonStyle</item>
+        <item name="customButtonStyleSpecial">@style/OperationButtonStyle</item>
+        <item name="customButtonStyleWarning">@style/WarningButtonStyle</item>
     </style>
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Borderless">
-<!--        <item name="android:background">@drawable/button_background</item>-->
         <item name="android:background">@color/grey</item>
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/white</item>
@@ -23,6 +30,42 @@
 
     <style name="WarningButtonStyle" parent="ButtonStyle">
         <item name="android:background">@color/red</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+    // Theme 2
+    <style name="QuickCalcThemeAlternative" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--        <item name="colorAccent">@color/colorAccent</item>-->
+        <item name="buttonStyle">@style/ButtonStyleAlternative</item>
+
+        <item name="customButtonStyleRegular">@style/ButtonStyleAlternative</item>
+        <item name="customButtonStyleSpecial">@style/OperationButtonStyleAlternative</item>
+        <item name="customButtonStyleWarning">@style/WarningButtonStyleAlternative</item>
+    </style>
+
+    <style name="ButtonStyleAlternative" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/greyDark</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="OperationButtonStyleAlternative" parent="ButtonStyleAlternative">
+        <item name="android:background">@color/grey</item>
+    </style>
+
+    <style name="WarningButtonStyleAlternative" parent="ButtonStyleAlternative">
+        <item name="android:background">@color/redLight</item>
     </style>
 
 </resources>

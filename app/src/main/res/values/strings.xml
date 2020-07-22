@@ -23,5 +23,6 @@
     <string name="key_BracketRight">)</string>
 
     <string name="ivMenu_ContentDescription">Menu icon</string>
+    <string name="ibRemove_ContentDescription">Key remove icon</string>
 
 </resources>

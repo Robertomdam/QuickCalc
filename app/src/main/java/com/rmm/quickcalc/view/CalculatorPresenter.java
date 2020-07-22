@@ -1,5 +1,7 @@
 package com.rmm.quickcalc.view;
 
+import android.util.Log;
+
 import com.rmm.quickcalc.data.CalculatorModel;
 import com.rmm.quickcalc.data.EOperators;
 import com.rmm.quickcalc.data.Expression;
@@ -12,10 +14,14 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     private ICalculator.View mView;
     private ICalculator.Model mModel;
 
+    boolean lastKeyPressedEquals;
+
     public CalculatorPresenter (ICalculator.View view, HashMap<EOperators, String> operators)
     {
         mView = view;
         mModel = new CalculatorModel(this, operators);
+
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -31,15 +37,19 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     @Override
     public void onNumberPressed(int n) {
 
-        if (mView.isClearedDisplay())
+        if (mView.isClearedDisplay() || lastKeyPressedEquals)
             mView.setDisplayData (String.valueOf (n));
         else
             mView.appendDisplayData(String.valueOf (n));
+
+        lastKeyPressedEquals = false;
     }
 
     @Override
     public void onACPressed() {
         mView.clearDisplay();
+
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -74,11 +84,31 @@ public class CalculatorPresenter implements ICalculator.Presenter {
                 mView.appendDisplayData(".");
         }
 
+        lastKeyPressedEquals = false;
     }
 
     @Override
     public void onOperatorEqualsPressed() {
 
+        // If input is only a 0, just do nothing
+        if (mView.isClearedDisplay())
+            return;
+
+        // Getting the display expresion
+        String displayData = mView.getDisplayData();
+
+        Expression expression = new Expression (displayData);
+        expression.extract();
+
+        if (expression.getStatus() != Expression.Status.READY)
+            return;
+
+        // Here we are sure we have at least two terms, so we will have to operate them.
+        String res = mModel.processExpression(expression);
+
+        mView.setDisplayData(res);
+
+        lastKeyPressedEquals = true;
     }
 
     @Override
@@ -90,6 +120,8 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         // If it is a number, it appends the operator
         else
             mView.appendDisplayData ( mModel.getOperator (EOperators.SUM) );
+
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -102,6 +134,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         else
             mView.appendDisplayData ( mModel.getOperator (EOperators.MINUS) );
 
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -114,6 +147,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         else
             mView.appendDisplayData ( mModel.getOperator (EOperators.MULTIPLICATION) );
 
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -126,6 +160,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         else
             mView.appendDisplayData ( mModel.getOperator (EOperators.DIVISION) );
 
+        lastKeyPressedEquals = false;
     }
 
     @Override
@@ -133,24 +168,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
 
         if (!mView.isClearedDisplay())
             mView.removeLastElementDisplay();
+
+        lastKeyPressedEquals = false;
     }
-//
-//    private String extractLastTermFromExpression (char[] data) {
-//
-//        String strData = Arrays.toString (data);
-//
-//        for (int i = data.length - 1; i >= 0 ; i--) {
-//
-//            // If there exists use the whole number from this operator to the end of the string.
-//            if (isOperator(data[i]))
-//            {
-//                if (i == data.length - 1)
-//                    return "0";
-//                else
-//                    return strData.substring (i + 1, strData.length());
-//            }
-//        }
-//
-//        return "";
-//    }
 }

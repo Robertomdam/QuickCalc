@@ -1,6 +1,9 @@
 package com.rmm.quickcalc.view;
 
 import com.rmm.quickcalc.data.EOperators;
+import com.rmm.quickcalc.data.Expression;
+
+import java.util.ArrayList;
 
 public interface ICalculator {
 
@@ -10,6 +13,8 @@ public interface ICalculator {
         boolean isOperator (String value);
 
         String getOperator (EOperators operator);
+
+        String processExpression (Expression validExpression);
     }
 
     public interface Presenter

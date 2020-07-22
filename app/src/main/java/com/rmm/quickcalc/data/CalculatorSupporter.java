@@ -43,4 +43,24 @@ public abstract class CalculatorSupporter {
 
         return null;
     }
+
+    public static double sum (double n1, double n2)
+    {
+        return n1 + n2;
+    }
+
+    public static double subtract (double n1, double n2)
+    {
+        return n1 - n2;
+    }
+
+    public static double mul (double n1, double n2)
+    {
+        return n1 * n2;
+    }
+
+    public static double divide (double n1, double n2)
+    {
+        return n1 / n2;
+    }
 }
