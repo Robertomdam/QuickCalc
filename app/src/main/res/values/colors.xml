@@ -4,13 +4,13 @@
 <!--    <color name="colorPrimaryDark">#3700B3</color>-->
 <!--    <color name="colorAccent">#03DAC5</color>-->
 
-    <color name="brandLight">#fff</color>
-    <color name="brand">#fff</color>
-    <color name="brandDark">#fff</color>
+<!--    <color name="brandLight">#fff</color>-->
+<!--    <color name="brand">#fff</color>-->
+<!--    <color name="brandDark">#fff</color>-->
 
-    <color name="accentLight">#fff</color>
-    <color name="accent">#fff</color>
-    <color name="accentDark">#fff</color>
+<!--    <color name="accentLight">#fff</color>-->
+<!--    <color name="accent">#fff</color>-->
+<!--    <color name="accentDark">#fff</color>-->
 
     <color name="white">#EEEEEE</color>
     <color name="whiteGrey">#CCCCCC</color>
@@ -23,7 +23,15 @@
     <color name="greyDark">#3b3b38</color>
     <color name="greyDarkPlus">#2a2a27</color>
 
-    <color name="redLight">#f85959</color>
+    <color name="redLight">#ffcad1</color>
     <color name="red">#ff304f</color>
+    <color name="redDark">#e30022</color>
+    <color name="redDarkPlus">#970017</color>
+
+    <color name="greenLight">#7aff64</color>
+    <color name="green">#1ec900</color>
+
+    <color name="blueLight">#59a9f8</color>
+    <color name="blue">#30b7ff</color>
 
 </resources>

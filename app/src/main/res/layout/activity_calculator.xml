@@ -5,17 +5,17 @@
     android:id="@+id/llRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyDarkPlus"
+    android:background="?attr/customColorBrandDark"
     android:orientation="vertical"
     android:padding="4dp"
     tools:context=".view.CalculatorActivity">
 
     <FrameLayout
+        style="?attr/customDisplayStyle"
         android:id="@+id/flMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:background="@color/whiteGrey">
+        android:layout_weight="0.1">
 
         <ImageView
             android:id="@+id/ivMenu"
@@ -28,17 +28,15 @@
     </FrameLayout>
 
     <TextView
+        style="?attr/customDisplayStyle"
         android:id="@+id/tvDisplay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.6"
-        android:background="@color/whiteGrey"
         android:gravity="bottom|end"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
-        android:textColor="@color/greyDark"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:maxLength="32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_backspace"
+                android:tint="?attr/customColorAccent"
                 android:contentDescription="@string/ibRemove_ContentDescription"/>
 
             <Button

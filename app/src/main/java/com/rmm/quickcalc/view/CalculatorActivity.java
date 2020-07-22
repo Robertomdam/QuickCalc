@@ -43,11 +43,15 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculator);
-        setFullscreen ();
 
-        findAllViews();
-        setupOnClickListeners();
+        /**
+         * As you can notice, there in no set content view method in the onCreate. This is
+         * because i'm handleling several themes in the app and the only way I have accomplished
+         * to make it works correctly (keeping the regular navigation with back button active) is
+         * to take some part of the code from the onCreate to onResume. I'm aware of these will
+         * be kind of kill performance (There are some findViewById methods also) but since the
+         * scope of the app is just to be a simple calculator I think that it will be fine.
+         */
 
         HashMap<EOperators, String> operators = new HashMap<>();
 
@@ -58,6 +62,20 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         operators.put (EOperators.DIVISION      , getResources().getString(R.string.key_Division        ));
 
         mPresenter = new CalculatorPresenter (this, operators);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setTheme(ThemeManager.getCurrentThemeResource());
+
+        setContentView(R.layout.activity_calculator);
+        setFullscreen ();
+
+        findAllViews();
+        setupOnClickListeners();
+
         mPresenter.onCreate();
     }
 

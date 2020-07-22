@@ -1,34 +1,65 @@
 <resources>
 
+    <attr name="customColorBrandLight" format="color" />
+    <attr name="customColorBrand" format="color" />
+    <attr name="customColorBrandDark" format="color" />
+
+    <attr name="customColorAccentLight" format="color" />
+    <attr name="customColorAccent" format="color" />
+    <attr name="customColorAccentDark" format="color" />
+
     <attr name="customButtonStyleRegular" format="reference" />
     <attr name="customButtonStyleSpecial" format="reference" />
     <attr name="customButtonStyleWarning" format="reference" />
 
+    <attr name="customDisplayStyle" format="reference"/>
+    <attr name="customButtonTextStyle" format="reference"/>
+
+
+
+
     // Theme 1
-    <style name="QuickCalcTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        <item name="colorAccent">@color/colorAccent</item>-->
-<!--        <item name="buttonStyle">?attr/customButtonStyleRegular</item>-->
-        <item name="buttonStyle">@style/ButtonStyle</item>
+    <style name="ThemeRaspberry" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="customColorBrandLight">@color/greyLight</item>
+        <item name="customColorBrand">@color/grey</item>
+        <item name="customColorBrandDark">@color/greyDark</item>
 
-        <item name="customButtonStyleRegular">@style/ButtonStyle</item>
-        <item name="customButtonStyleSpecial">@style/OperationButtonStyle</item>
-        <item name="customButtonStyleWarning">@style/WarningButtonStyle</item>
+        <item name="customColorAccentLight">@color/redLight</item>
+        <item name="customColorAccent">@color/red</item>
+
+        <item name="customDisplayStyle">@style/DisplayStyleRaspberry</item>
+        <item name="customButtonTextStyle">@style/ButtonTextStyleRaspberry</item>
+
+        <item name="buttonStyle">@style/ButtonStyleRaspberry</item>
+
+        <item name="customButtonStyleRegular">@style/ButtonStyleRaspberry</item>
+        <item name="customButtonStyleSpecial">@style/OperationButtonStyleRaspberry</item>
+        <item name="customButtonStyleWarning">@style/WarningButtonStyleRaspberry</item>
     </style>
 
-    <style name="ButtonStyle" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@color/grey</item>
-        <item name="android:textSize">32sp</item>
+    <style name="DisplayStyleRaspberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/whiteGrey</item>
+        <item name="android:textColor">@color/greyDark</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonTextStyleRaspberry" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="OperationButtonStyle" parent="ButtonStyle">
+    <style name="ButtonStyleRaspberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/grey</item>
+        <item name="android:textAppearance">@style/ButtonTextStyleRaspberry</item>
+    </style>
+
+    <style name="OperationButtonStyleRaspberry" parent="ButtonStyleRaspberry">
         <item name="android:background">@color/greyDark</item>
     </style>
 
-    <style name="WarningButtonStyle" parent="ButtonStyle">
+    <style name="WarningButtonStyleRaspberry" parent="ButtonStyleRaspberry">
         <item name="android:background">@color/red</item>
     </style>
 
@@ -41,31 +72,100 @@
 
 
 
-    // Theme 2
-    <style name="QuickCalcThemeAlternative" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--        <item name="colorAccent">@color/colorAccent</item>-->
-        <item name="buttonStyle">@style/ButtonStyleAlternative</item>
+    // Theme Blueberry
+    <style name="ThemeBlueberry" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="customColorBrandLight">@color/greyLight</item>
+        <item name="customColorBrand">@color/grey</item>
+        <item name="customColorBrandDark">@color/greyDark</item>
 
-        <item name="customButtonStyleRegular">@style/ButtonStyleAlternative</item>
-        <item name="customButtonStyleSpecial">@style/OperationButtonStyleAlternative</item>
-        <item name="customButtonStyleWarning">@style/WarningButtonStyleAlternative</item>
+        <item name="customColorAccentLight">@color/blueLight</item>
+        <item name="customColorAccent">@color/blue</item>
+
+        <item name="customDisplayStyle">@style/DisplayStyleBlueberry</item>
+        <item name="customButtonTextStyle">@style/ButtonTextStyleBlueberry</item>
+
+        <item name="buttonStyle">@style/ButtonStyleBlueberry</item>
+
+        <item name="customButtonStyleRegular">@style/ButtonStyleBlueberry</item>
+        <item name="customButtonStyleSpecial">@style/OperationButtonStyleBlueberry</item>
+        <item name="customButtonStyleWarning">@style/WarningButtonStyleBlueberry</item>
     </style>
 
-    <style name="ButtonStyleAlternative" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:background">@color/greyDark</item>
-        <item name="android:textSize">32sp</item>
+    <style name="DisplayStyleBlueberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/whiteGrey</item>
+        <item name="android:textColor">@color/greyDark</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonTextStyleBlueberry" parent="android:TextAppearance.Small">
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="OperationButtonStyleAlternative" parent="ButtonStyleAlternative">
+    <style name="ButtonStyleBlueberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/greyLight</item>
+        <item name="android:textAppearance">@style/ButtonTextStyleBlueberry</item>
+    </style>
+
+    <style name="OperationButtonStyleBlueberry" parent="ButtonStyleBlueberry">
         <item name="android:background">@color/grey</item>
     </style>
 
-    <style name="WarningButtonStyleAlternative" parent="ButtonStyleAlternative">
-        <item name="android:background">@color/redLight</item>
+    <style name="WarningButtonStyleBlueberry" parent="ButtonStyleBlueberry">
+        <item name="android:background">@color/blue</item>
+        <item name="android:textColor">@color/greyDarkPlus</item>
+    </style>
+
+
+
+
+
+    // Theme Strawberry
+    <style name="ThemeStrawberry" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="customColorBrandLight">@color/greyLight</item>
+        <item name="customColorBrand">@color/grey</item>
+        <item name="customColorBrandDark">@color/greyDark</item>
+
+        <item name="customColorAccentLight">@color/greenLight</item>
+        <item name="customColorAccent">@color/green</item>
+
+        <item name="customDisplayStyle">@style/DisplayStyleStrawberry</item>
+        <item name="customButtonTextStyle">@style/ButtonTextStyleStrawberry</item>
+
+        <item name="buttonStyle">@style/ButtonStyleStrawberry</item>
+
+        <item name="customButtonStyleRegular">@style/ButtonStyleStrawberry</item>
+        <item name="customButtonStyleSpecial">@style/OperationButtonStyleStrawberry</item>
+        <item name="customButtonStyleWarning">@style/WarningButtonStyleStrawberry</item>
+    </style>
+
+    <style name="DisplayStyleStrawberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/whiteGrey</item>
+        <item name="android:textColor">@color/greyDark</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonTextStyleStrawberry" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/redDarkPlus</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonStyleStrawberry" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@color/red</item>
+        <item name="android:textAppearance">@style/ButtonTextStyleStrawberry</item>
+    </style>
+
+    <style name="OperationButtonStyleStrawberry" parent="ButtonStyleStrawberry">
+        <item name="android:background">@color/redDarkPlus</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="WarningButtonStyleStrawberry" parent="ButtonStyleStrawberry">
+        <item name="android:background">@color/green</item>
     </style>
 
 </resources>
