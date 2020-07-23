@@ -4,8 +4,17 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * @author Roberto
+ * Class that represents a mathematical expression. It is compound of terms and operators.
+ * Expressions must be extracted by calling extract() method before accessing any other methods,
+ * since this will populate and alterate the other members of the instance.
+ */
 public class Expression {
 
+    /**
+     * Represents the available status of a expression.
+     */
     public enum Status { NOT_PROCESSED, READY, INVALID }
     private Status mStatus;
 
@@ -25,6 +34,13 @@ public class Expression {
         mOperators = new ArrayList<EOperators> ();
     }
 
+    /**
+     * Populates the terms and operators members of the instance based
+     * on the expression passed in instantiation process. Both terms and operators
+     * will not be sorted in any specific way, just the same it appears in the expression.
+     * Some minor fixed are accomplish in this method, like setting a 0 when an expression begins with
+     * an operator or removing an operator when it is the last element in the expression.
+     */
     public void extract ()
     {
         String expressionString = mExpressionString;
@@ -81,18 +97,34 @@ public class Expression {
         mStatus = Status.READY;
     }
 
+    /**
+     * Retrieves the terms of the expression.
+     * @return The terms member
+     */
     public ArrayList<String> getTerms() {
         return mTerms;
     }
 
+    /**
+     * Retrieves the operators of the expression.
+     * @return The operators memeber.
+     */
     public ArrayList<EOperators> getOperators() {
         return mOperators;
     }
 
+    /**
+     * Retrieves the status of the expression.
+     * @return The status of the expression.
+     */
     public Status getStatus() {
         return mStatus;
     }
 
+    /**
+     * Retrieves the expression as a String.
+     * @return The expression as a String.
+     */
     public String getStrExpression ()
     {
         StringBuilder strExpression = new StringBuilder();
@@ -108,7 +140,15 @@ public class Expression {
         return strExpression.toString();
     }
 
-    // This method converts the index of one operator in the operators list to the index of the same operator in the full expression (terms+operators)
+    /**
+     * Converts the index of one operator in the operators list to the
+     * index of the same operator in the full expression (terms+operators).
+     * Example: Expression 25+15*2
+     * The * operator has the index 1 in the list of operators. However, its index
+     * in the full expression would be 5.
+     * @param operatorIndex The index of the operator in the operators list.
+     * @return The index of the same operator in the full expression.
+     */
     public int getOperatorIndexInFullExpression (int operatorIndex)
     {
         int index = 0;
@@ -123,7 +163,15 @@ public class Expression {
         return index;
     }
 
-    // This method converts the index of one term in the term list to the index of the same term in the full expression (terms+operators)
+    /**
+     * Converts the index of one term in the terms list to the
+     * index of the same term in the full expression (terms+operators).
+     * Example: Expression 25+15*2
+     * The "15" term has the index 1 in the list of operators. However, its index
+     * in the full expression would be 3 (The beginning of the term).
+     * @param termIndex The index of the term in the terms list.
+     * @return The index of the same term in the full expression.
+     */
     public int getTermIndexInFullExpression (int termIndex)
     {
         int index = 0;

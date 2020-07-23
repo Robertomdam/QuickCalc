@@ -1,12 +1,14 @@
 package com.rmm.quickcalc.data;
 
-import android.util.Log;
-
 import com.rmm.quickcalc.view.ICalculator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author Roberto
+ * Class that acts as the model of the CalculatorActivity in a MVP pattern.
+ */
 public class CalculatorModel implements ICalculator.Model {
 
     private ICalculator.Presenter mPresenter;
@@ -24,21 +26,44 @@ public class CalculatorModel implements ICalculator.Model {
         CalculatorSupporter.init (mOperators);
     }
 
+    /**
+     * Checks if the value is an operator.
+     * @param value The value to check.
+     * @return Whether the value is an operator or not.
+     */
     public boolean isOperator (char value)
     {
         return CalculatorSupporter.isOperator (value);
     }
 
+    /**
+     * Checks if the value is an operator.
+     * @param value The value to check.
+     * @return Whether the value is an operator or not.
+     */
     public boolean isOperator (String value)
     {
         return CalculatorSupporter.isOperator (value);
     }
 
+    /**
+     * Retrieves the string mapped with the EOperator parameter variable.
+     * @param operator The EOperator variable.
+     * @return The string that matches with the EOperator variable.
+     */
     @Override
     public String getOperator(EOperators operator) {
         return CalculatorSupporter.getOperator (operator);
     }
 
+    /**
+     * Processes an expression, operating all its terms based on its corresponding operators. This
+     * process is aware of operators priorities.
+     * The process ends when only one term lefts in the expression, which corresponds with the
+     * result of the full expression.
+     * @param validExpression A expression that has previously been checked as valid (Expression.Status.READY).
+     * @return The final expression (Which is just a single term)
+     */
     @Override
     public String processExpression (Expression validExpression) {
 
@@ -112,7 +137,15 @@ public class CalculatorModel implements ICalculator.Model {
         return returnExpression.getStrExpression();
     }
 
-    int getFirstPriorityOperatorIndex (ArrayList<EOperators> operators)
+    /**
+     * Retrieves index of the the first occurrence of an operator that
+     * has priority (multiplication or division) from a list of operators.
+     * Example: The list of operators contains: { +, -, - x, +, + }
+     * In this list, the retrieved index would be 3.
+     * @param operators The list of operators.
+     * @return The index of the first operator with priority that is found.
+     */
+    private int getFirstPriorityOperatorIndex(ArrayList<EOperators> operators)
     {
         for (int i = 0; i < operators.size(); i++) {
             if (operators.get(i) == EOperators.MULTIPLICATION || operators.get(i) == EOperators.DIVISION)

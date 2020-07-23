@@ -3,8 +3,10 @@ package com.rmm.quickcalc.view;
 import com.rmm.quickcalc.data.EOperators;
 import com.rmm.quickcalc.data.Expression;
 
-import java.util.ArrayList;
-
+/**
+ * @author Roberto
+ * Interface to implement MVP in Calculator layout.
+ */
 public interface ICalculator {
 
     public interface Model

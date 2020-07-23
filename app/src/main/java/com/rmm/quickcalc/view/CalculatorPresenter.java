@@ -9,12 +9,16 @@ import com.rmm.quickcalc.data.Expression;
 import java.util.ArrayList;
 import java.util.HashMap;;
 
+/**
+ * @author Roberto
+ * Class to handle the presenter of CalculatorActivity using MVP
+ */
 public class CalculatorPresenter implements ICalculator.Presenter {
 
     private ICalculator.View mView;
     private ICalculator.Model mModel;
 
-    boolean lastKeyPressedEquals;
+    private boolean lastKeyPressedEquals;
 
     public CalculatorPresenter (ICalculator.View view, HashMap<EOperators, String> operators)
     {
@@ -24,16 +28,27 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Clears the display of the view.
+     */
     @Override
     public void onCreate() {
         mView.clearDisplay();
     }
 
+    /**
+     * Change the activity to the settings one.
+     */
     @Override
     public void onMenuPressed() {
         mView.goSettingsActivity();
     }
 
+    /**
+     * Appends the number pressed to the current expression in the display.
+     * If display is currently showing a 0, it will be replaced by the number instead of appended.
+     * @param n The number that was pressed.
+     */
     @Override
     public void onNumberPressed(int n) {
 
@@ -45,6 +60,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Clears the display.
+     */
     @Override
     public void onACPressed() {
         mView.clearDisplay();
@@ -52,6 +70,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Appends a dot in the display. This method checks if the last term in the expression has already a dot or not.
+     */
     @Override
     public void onDotPressed() {
 
@@ -87,6 +108,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Calls the model to process the current expression in the display.
+     * This method checks if the display is showing a 0 or the expression is not valid.
+     */
     @Override
     public void onOperatorEqualsPressed() {
 
@@ -94,7 +119,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         if (mView.isClearedDisplay())
             return;
 
-        // Getting the display expresion
+        // Getting the display expression
         String displayData = mView.getDisplayData();
 
         Expression expression = new Expression (displayData);
@@ -111,6 +136,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = true;
     }
 
+    /**
+     * Appends a sum operator to the expression.
+     * If the last element of the display is an operator it will be replaced by the sum one.
+     */
     @Override
     public void onOperatorSumPressed() {
 
@@ -124,6 +153,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Appends a minus operator to the expression.
+     * If the last element of the display is an operator it will be replaced by the minus one.
+     */
     @Override
     public void onOperatorMinusPressed() {
 
@@ -137,6 +170,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Appends a multiplication operator to the expression.
+     * If the last element of the display is an operator it will be replaced by the multiplication one.
+     */
     @Override
     public void onOperatorMultiplicationPressed() {
 
@@ -150,6 +187,10 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Appends a division operator to the expression.
+     * If the last element of the display is an operator it will be replaced by the division one.
+     */
     @Override
     public void onOperatorDivisionPressed() {
 
@@ -163,6 +204,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         lastKeyPressedEquals = false;
     }
 
+    /**
+     * Removes the last element of the display.
+     */
     @Override
     public void onBackPressed() {
 

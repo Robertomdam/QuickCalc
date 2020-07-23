@@ -3,6 +3,7 @@ package com.rmm.quickcalc.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,10 @@ import java.util.HashMap;
 
 import javax.net.ssl.SSLEngineResult;
 
+/**
+ * @author Roberto
+ * Activity that represents a calculator. It is managed using MVP pattern, representing the view.
+ */
 public class CalculatorActivity extends AppCompatActivity implements ICalculator.View {
 
     // MVP
@@ -40,6 +45,12 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     private Button btDivision;
     private ImageButton btBack;
 
+    /**
+     * Accomplishes several task that have to be done once at the beginning of the app.
+     * Maps the operators enum with the ones defined in the strings.xml resource.
+     * Instantiates the presenter of the MVP.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +75,16 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         mPresenter = new CalculatorPresenter (this, operators);
     }
 
+    /**
+     * Sets the theme of the activity depending on the current one in the ThemeManager.
+     * This provokes the setContentView method to run here, every time the onResume is called
+     * and also the same for the findAllViews calls.
+     */
     @Override
     protected void onResume() {
         super.onResume();
 
-        setTheme(ThemeManager.getCurrentThemeResource());
+        setTheme(ThemeManager.getCurrentThemeResource (getApplicationContext()));
 
         setContentView(R.layout.activity_calculator);
         setFullscreen ();
@@ -79,6 +95,9 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         mPresenter.onCreate();
     }
 
+    /**
+     * Find all the views in the layout and stores them in the corresponding variables.
+     */
     void findAllViews ()
     {
         // Menu
@@ -111,6 +130,9 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         btBack              = findViewById(R.id.buttonBack);
     }
 
+    /**
+     * Setups the onCLickListeners of the views that need it.
+     */
     void setupOnClickListeners ()
     {
         // Menu
@@ -192,6 +214,9 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         });
     }
 
+    /**
+     * Sets the fullscreen mode in the activity.
+     */
     void setFullscreen ()
     {
         // Teorically for (Build.VERSION.SDK_INT < 16)
@@ -199,33 +224,56 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
+    /**
+     * Goes to the settings activity.
+     */
     @Override
     public void goSettingsActivity() {
         Intent intent = new Intent (this, CalcSettingsActivity.class);
         startActivity (intent);
     }
 
+    /**
+     * Retrieves the content of the display.
+     * @return The content of the display.
+     */
     @Override
     public String getDisplayData() {
         return tvDisplay.getText().toString();
     }
 
+    /**
+     * Retrieves the last character of the display.
+     * @return The last character of the display.
+     */
     @Override
     public char getLastElementDisplayData() {
         return tvDisplay.getText().charAt (tvDisplay.getText().length() - 1);
     }
 
+    /**
+     * Sets the display content.
+     * @param data The data to be shown in the display.
+     */
     @Override
     public void setDisplayData (String data) {
         tvDisplay.setText (data);
     }
 
+    /**
+     * Replaces the last character of the display.
+     * @param data The new character to be used for replace the last one in the display.
+     */
     @Override
     public void replaceLastElementDisplay(String data) {
         removeLastElementDisplay();
         appendDisplayData (data);
     }
 
+    /**
+     * Appends some data in the display.
+     * @param data The data that have to be appended in the display.
+     */
     @Override
     public void appendDisplayData (String data) {
         tvDisplay.setText (
@@ -233,6 +281,9 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         );
     }
 
+    /**
+     * Removes the last character of the display.
+     */
     @Override
     public void removeLastElementDisplay() {
         String currentString = tvDisplay.getText().toString();
@@ -245,11 +296,18 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
             clearDisplay();
     }
 
+    /**
+     * Clears the data of the display.
+     */
     @Override
     public void clearDisplay () {
         tvDisplay.setText("0");
     }
 
+    /**
+     * Checks if the data of the display is 0 or not.
+     * @return Whether the data in the display is 0 or not.
+     */
     @Override
     public boolean isClearedDisplay() {
         return (tvDisplay.getText().toString().equals("0"));
