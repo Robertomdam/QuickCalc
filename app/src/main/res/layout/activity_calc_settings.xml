@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
             android:paddingVertical="6dp"
-            android:text="Settings"
+            android:text="@string/tvSettingsLabel"
             android:textColor="@color/greyDarkPlus"
-            android:textSize="36dp"
+            android:textSize="@dimen/settingsTitleTextSize"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -58,9 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Theme"
+            android:text="@string/tvThemeLabel"
             android:textColor="@color/greyDarkPlus"
-            android:textSize="24sp"/>
+            android:textSize="@dimen/spinnerThemeItemTextSize"/>
 
         <Space
             android:layout_width="wrap_content"

@@ -25,4 +25,7 @@
     <string name="ivMenu_ContentDescription">Menu icon</string>
     <string name="ibRemove_ContentDescription">Key remove icon</string>
 
+    <string name="tvSettingsLabel">Settings</string>
+    <string name="tvThemeLabel">Theme</string>
+
 </resources>

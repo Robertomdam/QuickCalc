@@ -1,13 +1,14 @@
 package com.rmm.quickcalc.view;
 
-import android.util.Log;
-
 import com.rmm.quickcalc.data.CalculatorModel;
+import com.rmm.quickcalc.data.CalculatorSupporter;
 import com.rmm.quickcalc.data.EOperators;
 import com.rmm.quickcalc.data.Expression;
+import com.rmm.quickcalc.data.ExpressionAnalizer;
+import com.rmm.quickcalc.data.InvalidExpressionException;
 
 import java.util.ArrayList;
-import java.util.HashMap;;
+import java.util.HashMap;
 
 /**
  * @author Roberto
@@ -52,6 +53,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     @Override
     public void onNumberPressed(int n) {
 
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
+
         if (mView.isClearedDisplay() || lastKeyPressedEquals)
             mView.setDisplayData (String.valueOf (n));
         else
@@ -78,6 +82,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
 
         String displayData = mView.getDisplayData();
 
+        if (displayData.equals("error"))
+            mView.clearDisplay();
+
         String lastElement = String.valueOf ( mView.getLastElementDisplayData() );
 
         if (lastElement.equals("."))
@@ -92,10 +99,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         {
             // Check if the full number already has a dot
 
-            Expression expression = new Expression (displayData);
-            expression.extract();
+            Expression expression = ExpressionAnalizer.extract(displayData);
 
-            if (expression.getStatus() != Expression.Status.READY)
+            if (expression == null)
                 return;
 
             ArrayList<String> terms = expression.getTerms();
@@ -122,16 +128,32 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         // Getting the display expression
         String displayData = mView.getDisplayData();
 
-        Expression expression = new Expression (displayData);
-        expression.extract();
+        if (displayData.equals("error"))
+            mView.clearDisplay();
 
-        if (expression.getStatus() != Expression.Status.READY)
+        Expression expression = ExpressionAnalizer.extract(displayData);
+        if (expression == null)
             return;
 
         // Here we are sure we have at least two terms, so we will have to operate them.
-        String res = mModel.processExpression(expression);
+        try {
+            double resultDouble = mModel.processExpression(expression);
 
-        mView.setDisplayData(res);
+            double result = CalculatorSupporter.getDoubleDecimalsPrecision(resultDouble, 3);
+
+            String resultStr = "";
+
+            if (CalculatorSupporter.canBeInteger(result))
+                resultStr = String.valueOf(Math.round(result));
+            else
+                resultStr = String.valueOf(result);
+
+            mView.setDisplayData(resultStr);
+
+        } catch (InvalidExpressionException e)
+        {
+            mView.setDisplayData("error");
+        }
 
         lastKeyPressedEquals = true;
     }
@@ -142,6 +164,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
      */
     @Override
     public void onOperatorSumPressed() {
+
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
 
         // If last element is an operator, replace by the pressed one
         if (mModel.isOperator(mView.getLastElementDisplayData()))
@@ -160,6 +185,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     @Override
     public void onOperatorMinusPressed() {
 
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
+
         // If last element is an operator, replace by the pressed one
         if (mModel.isOperator(mView.getLastElementDisplayData()))
             mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.MINUS) );
@@ -176,6 +204,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
      */
     @Override
     public void onOperatorMultiplicationPressed() {
+
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
 
         // If last element is an operator, replace by the pressed one
         if (mModel.isOperator(mView.getLastElementDisplayData()))
@@ -194,6 +225,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
     @Override
     public void onOperatorDivisionPressed() {
 
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
+
         // If last element is an operator, replace by the pressed one
         if (mModel.isOperator(mView.getLastElementDisplayData()))
             mView.replaceLastElementDisplay ( mModel.getOperator (EOperators.DIVISION) );
@@ -209,6 +243,9 @@ public class CalculatorPresenter implements ICalculator.Presenter {
      */
     @Override
     public void onBackPressed() {
+
+        if (mView.getDisplayData().equals("error"))
+            mView.clearDisplay();
 
         if (!mView.isClearedDisplay())
             mView.removeLastElementDisplay();

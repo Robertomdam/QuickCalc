@@ -40,12 +40,12 @@
     <style name="DisplayStyleRaspberry" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@color/whiteGrey</item>
         <item name="android:textColor">@color/greyDark</item>
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">@dimen/displayTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ButtonTextStyleRaspberry" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">@dimen/customButtonTextSize</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -94,12 +94,12 @@
     <style name="DisplayStyleBlueberry" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@color/whiteGrey</item>
         <item name="android:textColor">@color/greyDark</item>
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">@dimen/displayTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ButtonTextStyleBlueberry" parent="android:TextAppearance.Small">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">@dimen/customButtonTextSize</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -144,12 +144,12 @@
     <style name="DisplayStyleStrawberry" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@color/whiteGrey</item>
         <item name="android:textColor">@color/greyDark</item>
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">@dimen/displayTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ButtonTextStyleStrawberry" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">@dimen/customButtonTextSize</item>
         <item name="android:textColor">@color/redDarkPlus</item>
         <item name="android:textStyle">bold</item>
     </style>

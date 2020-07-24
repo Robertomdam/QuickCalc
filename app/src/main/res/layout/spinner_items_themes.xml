@@ -13,6 +13,6 @@
     android:textColor="@color/greyDarkPlus"
     android:textStyle="bold"
     android:gravity="center"
-    android:textSize="20dp"
+    android:textSize="@dimen/spinnerThemeItemTextSize"
     tools:text="Raspberry" />
 

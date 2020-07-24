@@ -1,6 +1,8 @@
 package com.rmm.quickcalc.data;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -116,5 +118,37 @@ public abstract class CalculatorSupporter {
     public static double divide (double n1, double n2)
     {
         return n1 / n2;
+    }
+
+    /**
+     * Retrieves the number with only the same number of decimals as indicated in the precision.
+     * @param number The number to operate with.
+     * @param precision The number of decimals for the returned number.
+     * @return The number passed by parameter with the specified precision.
+     */
+    public static double getDoubleDecimalsPrecision (double number, int precision)
+    {
+        int decimalsScale = BigDecimal.valueOf(number).scale();
+        int maxNumDecimals = precision;
+
+        if (maxNumDecimals > decimalsScale)
+            maxNumDecimals = decimalsScale;
+
+        String str = String.format(Locale.US, "%."+maxNumDecimals+"f", number);
+        double resultDoubleFixDecimals = Double.parseDouble ( str );
+
+        return resultDoubleFixDecimals;
+    }
+
+    /**
+     * Checks if the parameter number have all zeros in its decimals values.
+     * @param number The number to check.
+     * @return Whether the number has all its decimal values as zeros.
+     */
+    public static boolean canBeInteger (double number)
+    {
+        long resultLong = Math.round (number);
+
+        return (resultLong == number);
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="displayTextSize">50sp</dimen>
+    <dimen name="customButtonTextSize">44sp</dimen>
+    <dimen name="spinnerThemePlaceHolderTextSize">32sp</dimen>
+    <dimen name="spinnerThemeItemTextSize">36sp</dimen>
+
+    <dimen name="settingsTitleTextSize">48sp</dimen>
+    <dimen name="settingsThemeTextSize">36sp</dimen>
+
+    <dimen name="drawableBackspaceSize">40dp</dimen>
+    <dimen name="drawableMenuWidth">138dp</dimen>
+    <dimen name="drawableMenuHeight">198dp</dimen>
+    <dimen name="drawableArrowBackSize">54dp</dimen>
+</resources>
