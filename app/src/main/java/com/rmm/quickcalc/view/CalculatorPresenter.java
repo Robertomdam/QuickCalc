@@ -3,7 +3,6 @@ package com.rmm.quickcalc.view;
 import com.rmm.quickcalc.data.CalculatorModel;
 import com.rmm.quickcalc.data.CalculatorSupporter;
 import com.rmm.quickcalc.data.EOperators;
-import com.rmm.quickcalc.data.Expression;
 import com.rmm.quickcalc.data.ExpressionAnalizer;
 import com.rmm.quickcalc.data.InvalidExpressionException;
 
@@ -99,7 +98,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         {
             // Check if the full number already has a dot
 
-            Expression expression = ExpressionAnalizer.extract(displayData);
+            ExpressionAnalizer.Expression expression = ExpressionAnalizer.extract(displayData);
 
             if (expression == null)
                 return;
@@ -131,7 +130,7 @@ public class CalculatorPresenter implements ICalculator.Presenter {
         if (displayData.equals("error"))
             mView.clearDisplay();
 
-        Expression expression = ExpressionAnalizer.extract(displayData);
+        ExpressionAnalizer.Expression expression = ExpressionAnalizer.extract(displayData);
         if (expression == null)
             return;
 

@@ -64,7 +64,7 @@ public class CalculatorModel implements ICalculator.Model {
      * @throws InvalidExpressionException Exception thrown when any calculation fails.
      */
     @Override
-    public double processExpression (Expression validExpression) throws InvalidExpressionException {
+    public double processExpression (ExpressionAnalizer.Expression validExpression) throws InvalidExpressionException {
 
         ArrayList<EOperators> operators = validExpression.getOperators();
 

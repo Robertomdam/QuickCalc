@@ -1,7 +1,7 @@
 package com.rmm.quickcalc.view;
 
 import com.rmm.quickcalc.data.EOperators;
-import com.rmm.quickcalc.data.Expression;
+import com.rmm.quickcalc.data.ExpressionAnalizer;
 import com.rmm.quickcalc.data.InvalidExpressionException;
 
 /**
@@ -17,7 +17,7 @@ public interface ICalculator {
 
         String getOperator (EOperators operator);
 
-        double processExpression (Expression validExpression) throws InvalidExpressionException;
+        double processExpression (ExpressionAnalizer.Expression validExpression) throws InvalidExpressionException;
     }
 
     public interface Presenter
