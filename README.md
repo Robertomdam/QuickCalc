@@ -25,7 +25,7 @@ This is a very simple app that has educational purposes, made to learn deeper th
 
 ## Snapshots
 
-<img src="https://github.com/Robertomdam/QuickCalc/tree/master/snapshots/a.png" height="384" width="216"><img src="https://github.com/Robertomdam/QuickCalc/tree/master/snapshots/b.png" height="384" width="216"><img src="https://github.com/Robertomdam/QuickCalc/blob/master/snapshots/c.png" height="384" width="216">
+<img src="https://github.com/Robertomdam/QuickCalc/blob/master/snapshots/a.png" height="384" width="216"><img src="https://github.com/Robertomdam/QuickCalc/blob/master/snapshots/b.png" height="384" width="216"><img src="https://github.com/Robertomdam/QuickCalc/blob/master/snapshots/c.png" height="384" width="216">
 
 ### Technical features
 
